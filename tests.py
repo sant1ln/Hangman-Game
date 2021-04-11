@@ -24,34 +24,38 @@ if(is_letter):
 """ ______________________________________________________________________________ """
 
 game = False
-progreso = ''
-while(game == False):
-    random_word = 'hpta'
-    palabra = []
-    for letra in random_word:
-        palabra.append(letra)
+random_word = 'ana'
+palabra = []
+print('Juego del ahorcado')
+for letra in random_word:
+    palabra.append(letra)
 
-    listLen = len(palabra)
-    # print('_ '*listLen)
+listLen = len(palabra)
+acertions = []
+for a in range(0,listLen):
+    acertions.append(' _ ')
+
+while(game == False):
+    
 
     def lienarSearch(palabra,listLen,letter):
-        acertions = []
+        
         for i in range(0,listLen):
-            if(palabra[i] == letter):
-                acertions.append(i)
-            else:
-                acertions.append('_')
+            if(palabra[i] == letter and letter not in acertions[i]):
+                    acertions[i] = palabra[i]
         return acertions
 
-    letter = input('>')
-    result = lienarSearch(palabra,listLen,letter)
     
-    if(result):
-        for i in result:
-            if(i != '_'):
-                progreso = progreso + palabra[i]
-            else:
-                progreso = progreso + ' _ '
-    else:
-        print("Not found")
-    print(progreso)
+    finalString = ''.join(acertions)
+    print('D',finalString)
+    if(finalString == random_word):
+        print('Good Job!')
+        game = True
+        break
+    
+    letter = input('>')
+    lienarSearch(palabra,listLen,letter)
+
+            
+    
+    

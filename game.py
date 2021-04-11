@@ -1,4 +1,5 @@
 import random
+import os
 
 def read_data():
     words = []
@@ -15,13 +16,50 @@ def select_random_word(words):
 
 
 def game_core(random_word):
-    user_input = input('Ingrese una letra')
-    print(random_word.includes(user_input))
+    game = False
+    palabra = []
+    
+    for letra in random_word:
+        palabra.append(letra)
+
+    listLen = len(palabra)
+    acertions = []
+    for a in range(0,listLen):
+        acertions.append(' _ ')
+
+    while(game == False):
+        os.system('cls')
+        os.system('clear')
+
+        def lienarSearch(palabra,listLen,letter):
+            
+            for i in range(0,listLen):
+                if(palabra[i] == letter and letter not in acertions[i]):
+                        acertions[i] = palabra[i]
+            return acertions
+
+        
+        finalString = ''.join(acertions)
+        if(finalString == random_word):
+            print('Good Job!')
+            game = True
+            break
+        print('Hangman game (ಠ_ಠ)')
+       
+        print('>',finalString)
+        letter = input('Ingresa una letra: ')
+        lienarSearch(palabra,listLen,letter)
+
+
+
 
 def run():
     words = read_data()
     random_word = select_random_word(words)
     game_core(random_word)
+
+
+
 
 if __name__ == '__main__':
     run()
