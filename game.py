@@ -26,6 +26,7 @@ def game_core(random_word):
     acertions = []
     for a in range(0,listLen):
         acertions.append(' _ ')
+        
 
     while(game == False):
         os.system('cls')
@@ -42,6 +43,7 @@ def game_core(random_word):
         finalString = ''.join(acertions)
         if(finalString == random_word):
             print('Good Job!')
+            print('Word: ',random_word)
             game = True
             break
         print('Hangman game (ಠ_ಠ)')
