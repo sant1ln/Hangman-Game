@@ -12,8 +12,10 @@ def read_data():
 def select_random_word(words):
     random_number = random.randrange(0, 171)
     random_word = words[random_number]
+    without_acents = random_word.maketrans('áéíóú', 'aeiou')
+    remove_acents = random_word.translate(without_acents)
+    random_word = remove_acents
     return random_word
-
 
 def game_core(random_word):
     game = False
@@ -48,20 +50,14 @@ def game_core(random_word):
             break
         print('Hangman game (ಠ_ಠ)')
        
-        print('>',finalString)
-        letter = input('Ingresa una letra: ')
+        print('>',finalString.capitalize())
+        letter = input('Ingresa una letra: ').lower()
         lienarSearch(palabra,listLen,letter)
-
-
-
 
 def run():
     words = read_data()
     random_word = select_random_word(words)
     game_core(random_word)
-
-
-
 
 if __name__ == '__main__':
     run()
